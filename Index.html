@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./JS/index.js"></script>
+    <link rel="stylesheet" href="./Css/styles.css" />
+    <title>Pac-man</title>
+  </head>
+  <body>
+    <header>
+      <h1>Pac-Man</h1>
+      <h2><span id="points">0</span> points</h2>
+    </header>
+
+    <table cellpadding="10s">
+        <tr class="row1">
+            <td class="col1" id="sql1_1"></td>
+            <td class="col2" id="sql1_2"></td>
+            <td class="col3" id="sql1_3"></td>
+            <td class="col4" id="sql1_4"></td>
+            <td class="col5" id="sql1_5"></td>
+            <td class="col6" id="sql1_6"></td>
+            <td class="col7" id="sql1_7"></td>
+            <td class="col8" id="sql1_8"></td>
+            <td class="col9" id="sql1_9"></td>
+            <td class="col10" id="sql1_10"></td>
+        </tr>
+        <tr class="row2">
+            <td class="col1" id="sql2_1"></td>
+            <td class="col2" id="sql2_2"></td>
+            <td class="col3" id="sql2_3"></td>
+            <td class="col4" id="sql2_4"></td>
+            <td class="col5" id="sql2_5"></td>
+            <td class="col6" id="sql2_6"></td>
+            <td class="col7" id="sql2_7"></td>
+            <td class="col8" id="sql2_8"></td>
+            <td class="col9" id="sql2_9"></td>
+            <td class="col10" id="sql2_10"></td>
+        </tr>
+        <tr class="row3">
+            <td class="col1" id="sql3_1"></td>
+            <td class="col2" id="sql3_2"></td>
+            <td class="col3" id="sql3_3"></td>
+            <td class="col4" id="sql3_4"></td>
+            <td class="col5" id="sql3_5"></td>
+            <td class="col6" id="sql3_6"></td>
+            <td class="col7" id="sql3_7"></td>
+            <td class="col8" id="sql3_8"></td>
+            <td class="col9" id="sql3_9"></td>
+            <td class="col10" id="sql3_10"></td>
+        </tr>
+        <tr class="row4">
+            <td class="col1" id="sql4_1"></td>
+            <td class="col2" id="sql4_2"></td>
+            <td class="col3" id="sql4_3"></td>
+            <td class="col4" id="sql4_4"></td>
+            <td class="col5" id="sql4_5"></td>
+            <td class="col6" id="sql4_6"></td>
+            <td class="col7" id="sql4_7"></td>
+            <td class="col8" id="sql4_8"></td>
+            <td class="col9" id="sql4_9"></td>
+            <td class="col10" id="sql4_10"></td>
+        </tr>
+        <tr class="row5">
+            <td class="col1" id="sql5_1"></td>
+            <td class="col2" id="sql5_2"></td>
+            <td class="col3" id="sql5_3"></td>
+            <td class="col4" id="sql5_4"></td>
+            <td class="col5" id="sql5_5"></td>
+            <td class="col6" id="sql5_6"></td>
+            <td class="col7" id="sql5_7"></td>
+            <td class="col8" id="sql5_8"></td>
+            <td class="col9" id="sql5_9"></td>
+            <td class="col10" id="sql5_10"></td>
+        </tr>
+        <tr class="row6">
+            <td class="col1" id="sql6_1"></td>
+            <td class="col2" id="sql6_2"></td>
+            <td class="col3" id="sql6_3"></td>
+            <td class="col4" id="sql6_4"></td>
+            <td class="col5" id="sql6_5"></td>
+            <td class="col6" id="sql6_6"></td>
+            <td class="col7" id="sql6_7"></td>
+            <td class="col8" id="sql6_8"></td>
+            <td class="col9" id="sql6_9"></td>
+            <td class="col10" id="sql6_10"></td>
+        </tr>
+        <tr class="row7">
+            <td class="col1" id="sql7_1"> 
+            <td class="col2" id="sql7_2"></td>
+            <td class="col3" id="sql7_3"></td>
+            <td class="col4" id="sql7_4"></td>
+            <td class="col5" id="sql7_5"></td>
+            <td class="col6" id="sql7_6"></td>
+            <td class="col7" id="sql7_7"></td>
+            <td class="col8" id="sql7_8"></td>
+            <td class="col9" id="sql7_9"></td>
+            <td class="col10" id="sql7_10"></td>
+        </tr>
+        <tr class="row8">
+            <td class="col1" id="sql8_1"></td>
+            <td class="col2" id="sql8_2"></td>
+            <td class="col3" id="sql8_3"></td>
+            <td class="col4" id="sql8_4"></td>
+            <td class="col5" id="sql8_5"></td>
+            <td class="col6" id="sql8_6"></td>
+            <td class="col7" id="sql8_7"></td>
+            <td class="col8" id="sql8_8"></td>
+            <td class="col9" id="sql8_9"></td>
+            <td class="col10" id="sql8_10"></td>
+        </tr>
+        <tr class="row9">
+            <td class="col1" id="sql9_1"></td>
+            <td class="col2" id="sql9_2"></td>
+            <td class="col3" id="sql9_3"></td>
+            <td class="col4" id="sql9_4"></td>
+            <td class="col5" id="sql9_5"></td>
+            <td class="col6" id="sql9_6"></td>
+            <td class="col7" id="sql9_7"></td>
+            <td class="col8" id="sql9_8"></td>
+            <td class="col9" id="sql9_9"></td>
+            <td class="col10" id="sql9_10"></td>
+        </tr>
+        <tr class="row10">
+            <td class="col1" id="sql10_1"></td>
+            <td class="col2" id="sql10_2"></td>
+            <td class="col3" id="sql10_3"></td>
+            <td class="col4" id="sql10_4"></td>
+            <td class="col5" id="sql10_5"></td>
+            <td class="col6" id="sql10_6"></td>
+            <td class="col7" id="sql10_7"></td>
+            <td class="col8" id="sql10_8"></td>
+            <td class="col9" id="sql10_9"></td>
+            <td class="col10" id="sql10_10"></td>
+        </tr>
+    </table>
+  </body>
+</html>

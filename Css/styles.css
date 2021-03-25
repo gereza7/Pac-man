@@ -1,0 +1,50 @@
+header {
+    box-sizing: border-box;
+    background-color: rgb(249, 253, 0);
+    color: black;
+    /* width: 840px; */
+    margin: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+    -moz-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+    box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+    text-align: center;
+  }
+  
+  table {
+    border: 1px solid black;
+    background-color: black;
+    margin: auto;
+    -webkit-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+    -moz-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+    box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
+  }
+  
+  td {
+    background-color: black;
+    width: 10px;
+    height: 10px;
+  }
+
+.pacman {
+    border-radius: 60px;
+    width: 5px;
+    height: 5px;
+    background-image: url("../images/Pacman.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.smallBall, .bigBall {
+    color:white;
+    font-size: 10px;
+}
+
+.wall{
+    width: 5px;
+    height: 5px;
+    background-image: url("../images/Wall.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
