@@ -1,6 +1,9 @@
-heeader {
+body {
+    margin: 0;
+}
+hesader {
     box-sizing: border-box;
-    background-image: url("./images/pacmanDown.png");
+    /*background-image: url("./images/pacmanDown.png");*/
     color: black;
     /* width: 840px; */
     margin: auto;
@@ -78,11 +81,6 @@ heeader {
 }
 
 
-
-.newLine {
-    clear:both;
-}
-
 .img{
     width: 600px;
     height: 200px;
@@ -124,4 +122,217 @@ html{
  margin-right: 0px;
  margin-left: 0px;
  
+}
+
+/* ---------------------------*/
+/* GHOST*/
+/* ---------------------------*/
+
+/* ---------------------------*/
+/*           RED              */
+/* ---------------------------*/
+.redGhost {
+    /*background-color:Red;
+    color:red;*/
+    width: 5px;
+    height: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.redGhostLeft {
+    background-image: url("../images/ghostRedLeft.png");
+}
+
+.redGhostRight {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.redGhostUp{
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.redGhostDown {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+/* ---------------------------*/
+/*           PINK             */
+/* ---------------------------*/
+
+.pinkGhost {
+    background-color:pink;
+    color:pink;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.pinkGhostLeft {
+    background-image: url("../images/ghostRedLeft.png");
+}
+
+.pinkGhostRight {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.pinkGhostUp{
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.pinkGhostDown {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+/* ---------------------------*/
+/*           PURPLE           */
+/* ---------------------------*/
+
+.purpleGhost {
+    background-color:purple;
+    color:purple;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.purpleGhostLeft {
+    background-image: url("../images/ghostRedLeft.png");
+}
+
+.purpleGhostRight {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.purpleGhostUp{
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.purpleGhostDown {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+/* ---------------------------*/
+/*           ORANGE           */
+/* ---------------------------*/
+
+.orangeGhost {
+    background-color:orange;
+    color:orange;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.orangeGhostLeft {
+    background-image: url("../images/ghostRedLeft.png");
+}
+
+.orangeGhostRight {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.orangeGhostUp{
+    background-image: url("../images/ghostRedRight.png");
+}
+
+.orangeGhostDown {
+    background-image: url("../images/ghostRedRight.png");
+}
+
+
+/* ---------------------------*/
+/* POPUP*/
+/* ---------------------------*/
+.overlay {
+    background: rgba(0,0,0,.3);
+    position: fixed;/*abarca toda la pantalla*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center; /* Alinear de forma vertical */
+    justify-content: center; /* Alinear de forma horizontal */
+    visibility: hidden;
+ }
+
+ .overlay.active {
+     visibility: visible;
+ }
+ 
+ .popup {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+   background: #f8f8f8;
+   box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
+   border-radius: 3px;
+   padding: 20px;
+   text-align: center;
+   width: 600px;
+
+   transition: .5 ease all; 
+   transform: scale(0.7);
+   opacity: 0;
+    
+ }
+ 
+  .popup h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    /*opacity: 0;*/
+ }
+ 
+ .popup h4 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    /*opacity: 0;*/
+ }
+
+ .popup .authors {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: blue;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.popup .btn-submit{
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5878e2;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;
+    transition: .3s ease all;
+
+}
+
+.popup .btn-submit:hover{
+    background: rgba(94, 125, 277, .7);
+}
+ 
+ /*******************************/
+ /******** ANIMACIONES **********/
+ /*******************************/
+
+.popup.active{
+    opacity: 1; 
+    transform: scale(1);
+}
+
+.popup.active h1{
+    animation: entradaTitulo 3s ease .5s forwards;
+    opacity: 1; 
+    transform: scale(1);
+}
+
+
+@keyframes entradaTitulo {
+    from {
+        transform:translateY(-25px);
+        opacity: 0;
+    }
+    to {
+        transform:translateY(0);
+        opacity: 1;
+    }
 }

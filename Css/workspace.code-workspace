@@ -3,6 +3,9 @@
 		{
 			"name": "Game",
 			"path": ".."
+		},
+		{
+			"path": "../../../../Downloads/GamePAC-MAN/images"
 		}
 	],
 	"settings": {

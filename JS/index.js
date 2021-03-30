@@ -1,23 +1,110 @@
-const level1=[
-    [2,3,3,3,3,3,3,3,3,2],
-    [3,3,3,3,3,3,3,3,3,3],
-    [3,3,3,3,3,3,3,3,3,3],
-    [3,3,3,3,4,3,3,3,3,3],
-    [3,3,3,3,4,3,3,3,3,3],
-    [3,3,3,3,4,4,4,3,3,3],
-    [3,3,3,3,3,3,3,3,3,3],
-    [3,3,2,3,4,4,4,3,3,3],
-    [3,3,3,3,3,3,3,3,3,3],
-    [2,3,3,3,3,3,3,3,3,2]    
+mapsPacMan = [
+    { 
+        map :[
+              [2,3,3,3,3,3,3,3,3,2],
+              [3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,4,4,4,3,3,3],
+              [3,3,3,3,3,3,3,5,3,3],
+              [3,3,2,3,4,4,4,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3],
+              [2,3,3,3,3,3,3,3,3,2]     
+            ],
+        sizeX: 10,
+        sizeY: 10
+    },
+    { 
+        map :[
+              [2,3,3,3,3,3,3,3,3,2],
+              [3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,5,3,3],
+              [3,3,2,3,4,4,4,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3],
+              [2,3,3,3,3,3,3,3,3,2],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3],
+              [3,3,3,3,4,4,4,3,3,3],
+              [3,3,3,3,3,3,3,5,3,3],
+              [3,3,2,3,3,3,3,3,3,3],    
+            ],
+        sizeX: 10,
+        sizeY: 15
+    },
+    { 
+        map :[
+              [2,3,3,3,3,3,3,3,3,2,2,3,3,3,3,3,3,3,3,2],
+              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,5,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,2,3,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [2,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,3,3,3,3,3,5,3,3,3,3,3,3,3,3,3,3,3,3],
+              [3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2],    
+            ],
+        sizeX: 20,
+        sizeY: 15
+    }
 ];
+
+const level1 = mapsPacMan[0].map;
+
+const size = 10;
+
+const sizeX = mapsPacMan[0].sizeX;
+const sizeY = mapsPacMan[0].sizeY;
+
+
+
+var points = 0;
+var idTimeOut;
+var lifes = 3;
+
+const life = document.querySelector("vida")
+const drawLife = `<img class="imgVida" src="../images/vida.png"/>`;
+
+const pointSmallBall = 10;
+const drawSmallBall = `<svg height="10" width="10"><circle cx=3 cy=3 r="3" fill="white"/></svg>`
+
+const pointBigBall = 100;
+const drawBigBall = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="green"/></svg>`;
+
+const pointGhost=150;
+const drawRedGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="red"/></svg>`;
+const drawPinkGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="pink"/></svg>`;
+const drawOrangeGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="orange"/></svg>`;
+
+const pacman = {
+    pos: { x: 4, y: 4 },
+    dir: 3, // 0=up, 1=right, 2=down, 3=left
+};
+
+const ghosts = {
+    redGhost :    { dir: 1, x: 9, y: 7, color:"red"},
+    pinkGhost :   { dir: 3, x: 9, y: 7, color:"pink"},
+    purpleGhost : { dir: 3, x: 9, y: 7, color:"purple"},
+    orangeGhost : { dir: 3, x: 9, y: 7, color:"orange"},
+    }
+
 
 function createBoard() { //Dibujar tablero
    const board = document.getElementById("board");
-console.log(board)
-    level1.forEach((line, idx) => {
+   level1.forEach((line, idx) => {
         var row = document.createElement("tr");
         row.classList.add(`row${idx + 1}`);
-        console.log("--", row)
+
         line.forEach((el, i) => {
             let square = document.createElement("td");
             square.classList.add(`col${i + 1}`);
@@ -30,52 +117,19 @@ console.log(board)
             if (el === 4) {
                 square.classList.add("wall");
             }
+            if (el === 5) {
+                square.classList.add("redGhostRight");
+            }
             row.appendChild(square);
         });
         board.appendChild(row);
     });
 }
-//createBoard();
 
 
-const size = 10;
-var points = 0;
-var idTimeOut;
-var lifes = 3;
-const life = document.querySelector("vida")
-const drawLife = `<img class="imgVida" src="../images/vida.png"/>`
-const pointSmallBall = 10;
-const drawSmallBall = `<svg height="10" width="10"><circle cx=3 cy=3 r="3" fill="white"/></svg>`
-
-const pointBigBall = 100;
-const drawBigBall = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="green"/></svg>`;
-
-const bigBallPosition = {
-    //x: Math.floor(Math.random() * 9),
-    //y: Math.floor(Math.random() * 9)
-    x: 1,
-    y: 1
-};
-
-const pacman = {
-    pos: { x: 4, y: 4 },
-    dir: 3, // 0=up, 1=right, 2=down, 3=left
-    length: 1, // number of blocks
-};
-
-const level = {
-    level1: [
-        { x: 3, y: 4 },
-        { x: 4, y: 4 },
-        { x: 5, y: 4 },
-        { x: 5, y: 5 },
-        { x: 5, y: 6 },
-        { x: 5, y: 7 }
-    ]
-}
 
 //Conectar HTML con JS
-var board = new Array(size).fill(null).map((e) => new Array(size).fill(null));
+var board = new Array(sizeX).fill(null).map((e) => new Array(sizeY).fill(null));
 
 function printBoard() {
     board.forEach((row, r) => {
@@ -89,6 +143,15 @@ function printBoard() {
                     case 3: elem.classList.add("pleft"); break;
                 }
             }
+
+            function ghostFaceRed(){
+                switch(ghosts.redGhost.dir){
+                    case 0: elem.classList.add("redGhostUp"); break;
+                    case 1: elem.classList.add("redGhostRight"); break;
+                    case 2: elem.classList.add("redGhostDown"); break;
+                    case 3: elem.classList.add("redGhostLeft"); break;
+                }
+            }
             elem.classList.remove("pacman");
             elem.classList.remove("bigBall");
             elem.classList.remove("smallBall");
@@ -96,6 +159,8 @@ function printBoard() {
             elem.classList.remove("pright");
             elem.classList.remove("pdown");
             elem.classList.remove("pleft");
+            elem.classList.remove("redGhost");
+            elem.classList.remove("redGhostRight");
             elem.innerHTML = ''
 
             if (board[r][c] === 0 && pacman.pos.x === r && pacman.pos.y === c) {
@@ -117,6 +182,10 @@ function printBoard() {
             }
             if (board[r][c] === 4) {
                 elem.classList.add("wall");
+            }
+            if(board[r][c] === 5) { // ghost RED
+                elem.classList.add("redGhost");
+                ghostFaceRed();
             }
 
         });
@@ -171,7 +240,7 @@ function checkEat() {
 
 function cleanBoard() {
     // Limpiar el board
-    board = new Array(size).fill(null).map((e) => new Array(size).fill(null));
+    board = new Array(sizeX).fill(null).map((e) => new Array(sizeY).fill(null));
 }
 
 function checkLifes(){
@@ -186,8 +255,8 @@ function printLifes(){
 }
 
 function pushSmallBall() {
-    for(var i=0; i < 10; i++ ) {
-        for(var j=0; j < 10; j++) {
+    for(var i=0; i < sizeX; i++ ) {
+        for(var j=0; j < sizeY; j++) {
       
           if(level1[i][j] === 3) {
             board[i][j]  = 3; 
@@ -197,8 +266,8 @@ function pushSmallBall() {
 }
 
 function pushBigBall() {
-    for(var i=0; i < 10; i++ ) {
-        for(var j=0; j < 10; j++) {
+    for(var i=0; i < sizeX; i++ ) {
+        for(var j=0; j < sizeY; j++) {
       
           if(level1[i][j] === 2) {
             board[i][j]  = 2; 
@@ -208,11 +277,22 @@ function pushBigBall() {
 }
 
 function pushWall() {
-    for(var i=0; i < 10; i++ ) {
-        for(var j=0; j < 10; j++) {
+    for(var i=0; i < sizeX; i++ ) {
+        for(var j=0; j < sizeY; j++) {
       
           if(level1[i][j] === 4) {
-            board[i][j]  =4; 
+            board[i][j] = 4; 
+      }
+        }
+      }
+}
+
+function pushGhost() {
+    for(var i=0; i < sizeX; i++ ) {
+        for(var j=0; j < sizeY; j++) {
+      
+          if(level1[i][j] === 5) {
+            board[i][j] = 5; 
       }
         }
       }
@@ -232,13 +312,14 @@ function increasePoints(increaseBall) {
 }
 
 function gameOver() {
-    board.forEach((row, r) => {
-        row.forEach((col, c) => {
+    var lengtSBall=document.querySelectorAll(".smallBall").length;
+    var lengtBBall=document.querySelectorAll(".bigBall").length;
 
-        })
-    })
-    alert("You WIN!!!!");
-    clearTimeOut(idTimeOut);
+    if( lengtSBall === 0 && lengtBBall === 0 )  {
+        alert("You WIN!!!!");
+        clearTimeOut(idTimeOut);
+    }
+  
 }
 
 function animate() {
@@ -248,10 +329,7 @@ function animate() {
         printBoard();
         //Averiguar si no hay mas bolas blancas
         //Puede ser buscando en el Board o Por la puntuación
-        if (points === 1000) { gameOver() }
-        /*if(!board.includes(3)) {
-          gameOver();
-        }*/
+        gameOver();
         requestAnimationFrame(animate);
     }, 300)
 }
@@ -262,6 +340,7 @@ function startLevel() {
     pushWall(); // Muro
     pushSmallBall();// Bola pequeña
     pushBigBall(); //Bola grande
+    pushGhost(); //Fantasma
 }
 startLevel();
 var timerId = requestAnimationFrame(animate);
