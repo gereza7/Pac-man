@@ -72,7 +72,13 @@ const level1 = mapsPacMan[idx].map;
 const sizeX = mapsPacMan[idx].sizeX;
 const sizeY = mapsPacMan[idx].sizeY;
 
+const wakawaka = {
+    soundWaka: new Audio("./Sounds/wakawaka.mp3")
+  };
 
+const BigBallSound = {
+    sound: new Audio("./Sounds/BigPointSound.mp3")
+  };
 
 var points = 0;
 var idTimeOut;
@@ -239,7 +245,7 @@ function movePacman() {
         if (!(pacman.pos.x === 0) && !(board[pacman.pos.x - 1][pacman.pos.y] === 4)) {
             newPacman.x = pacman.pos.x - 1
         }
-
+        
     }
     if (pacman.dir === 1) {
         if (!(pacman.pos.y === sizeY - 1) && !(board[pacman.pos.x][pacman.pos.y + 1] === 4)) {
@@ -267,11 +273,13 @@ function checkEat() {
     if (board[pacman.pos.x][pacman.pos.y] === 3) {
         board[pacman.pos.x][pacman.pos.y] = 0;
         increasePoints(pointSmallBall);
+        wakawaka.soundWaka.play();
 
     }
     if (board[pacman.pos.x][pacman.pos.y] === 2) {
         board[pacman.pos.x][pacman.pos.y] = 0;
         increasePoints(pointBigBall);
+        BigBallSound.sound.play();
     }
 }
 
@@ -345,10 +353,10 @@ function pushGhost() {
 function newPosition() {
     movePacman();
     checkEat(); // cambio el estado de Board
-
     //board[bigBallPosition.y][bigBallPosition.x] = 2; //Bola grande 
 
 }
+
 
 function increasePoints(increaseBall) {
     points += increaseBall;
@@ -362,9 +370,11 @@ function gameOver() {
     if( lengtSBall === 0 && lengtBBall === 0 )  {
         alert("You WIN!!!!");
         clearTimeOut(idTimeOut);
+        wakawaka.soundWaka.pause();
     }
   
 }
+
 
 function animate() {
     idTimeOut = setTimeout(function () { //Velocidad de movimiento del PAC-MAN
