@@ -33,41 +33,47 @@ mapsPacMan = [
               [3,3,3,3,3,3,3,5,3,3],
               [3,3,2,3,3,3,3,3,3,3],    
             ],
-        sizeX: 10,
-        sizeY: 15
+        sizeX: 15,
+        sizeY: 10
     },
     { 
         map :[
-              [2,3,3,3,3,3,3,3,3,2,2,3,3,3,3,3,3,3,3,2],
-              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,5,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,2,3,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [2,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,5,3,3,3,3,3,3,3,3,3,3,3,3],
-              [3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2],    
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,4],
+            [4,2,4,4,3,4,4,4,3,4,3,4,4,4,3,4,4,2,4],
+            [4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4],
+            [4,3,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,3,4],
+            [4,3,3,3,3,4,3,3,3,4,3,3,3,4,3,3,3,3,4],
+            [4,4,4,4,3,4,4,4,3,4,3,4,4,4,3,4,4,4,4],
+            [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
+            [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
+            [3,3,3,3,3,3,3,4,5,6,7,4,3,3,3,3,3,3,3],
+            [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
+            [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
+            [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
+            [4,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,4],
+            [4,2,4,4,3,4,4,4,3,4,3,4,4,4,3,4,4,2,4],
+            [4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4],
+            [4,4,3,4,3,4,3,4,4,4,4,4,3,4,3,4,3,4,4],
+            [4,3,3,3,3,4,3,3,3,4,3,3,3,4,3,3,3,3,4],
+            [4,3,4,4,4,4,4,4,3,4,3,4,4,4,4,4,4,3,4],
+            [4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],    
             ],
-        sizeX: 20,
-        sizeY: 15
-    }
+        sizeX: 21,
+        sizeY: 19
+    },
+   
 ];
 
-const level1 = mapsPacMan[0].map;
+const idx=2;
+const level1 = mapsPacMan[idx].map;
 
-const size = 10;
-
-const sizeX = mapsPacMan[0].sizeX;
-const sizeY = mapsPacMan[0].sizeY;
-
+const sizeX = mapsPacMan[idx].sizeX;
+const sizeY = mapsPacMan[idx].sizeY;
 
 
+var myMusic;
 var points = 0;
 var idTimeOut;
 var lifes = 3;
@@ -87,7 +93,7 @@ const drawPinkGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill=
 const drawOrangeGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="orange"/></svg>`;
 
 const pacman = {
-    pos: { x: 4, y: 4 },
+    pos: { x: 3, y: 3 },
     dir: 3, // 0=up, 1=right, 2=down, 3=left
 };
 
@@ -119,6 +125,9 @@ function createBoard() { //Dibujar tablero
             }
             if (el === 5) {
                 square.classList.add("redGhostRight");
+            }
+            if (el === 6) {
+                square.classList.add("pinkGhostRight");
             }
             row.appendChild(square);
         });
@@ -152,6 +161,23 @@ function printBoard() {
                     case 3: elem.classList.add("redGhostLeft"); break;
                 }
             }
+
+            function ghostFacePink(){
+                switch(ghosts.pinkGhost.dir){
+                    case 0: elem.classList.add("pinkGhostUp"); break;
+                    case 1: elem.classList.add("pinkGhostRight"); break;
+                    case 2: elem.classList.add("pinkGhostDown"); break;
+                    case 3: elem.classList.add("pinkGhostLeft"); break;
+                }
+            }
+            function ghostFaceOrange(){
+                switch(ghosts.orangeGhost.dir){
+                    case 0: elem.classList.add("orangeGhostUp"); break;
+                    case 1: elem.classList.add("orangeGhostRight"); break;
+                    case 2: elem.classList.add("orangeGhostDown"); break;
+                    case 3: elem.classList.add("orangeGhostLeft"); break;
+                }
+            }
             elem.classList.remove("pacman");
             elem.classList.remove("bigBall");
             elem.classList.remove("smallBall");
@@ -160,7 +186,11 @@ function printBoard() {
             elem.classList.remove("pdown");
             elem.classList.remove("pleft");
             elem.classList.remove("redGhost");
+            elem.classList.remove("orangeGhost");
+            elem.classList.remove("pinkGhost");
             elem.classList.remove("redGhostRight");
+            elem.classList.remove("pinkGhostRight");
+            elem.classList.remove("orangeGhostRight");
             elem.innerHTML = ''
 
             if (board[r][c] === 0 && pacman.pos.x === r && pacman.pos.y === c) {
@@ -187,6 +217,14 @@ function printBoard() {
                 elem.classList.add("redGhost");
                 ghostFaceRed();
             }
+            if(board[r][c] === 6) { // ghost PINK
+                elem.classList.add("pinkGhost");
+                ghostFacePink();
+            }
+            if(board[r][c] === 7) { // ghost ORANGE
+                elem.classList.add("orangeGhost");
+                ghostFaceOrange();
+            }
 
         });
     });
@@ -204,13 +242,13 @@ function movePacman() {
 
     }
     if (pacman.dir === 1) {
-        if (!(pacman.pos.y === size - 1) && !(board[pacman.pos.x][pacman.pos.y + 1] === 4)) {
+        if (!(pacman.pos.y === sizeY - 1) && !(board[pacman.pos.x][pacman.pos.y + 1] === 4)) {
             newPacman.y = pacman.pos.y + 1
         }
 
     }
     if (pacman.dir === 2) {
-        if (!(pacman.pos.x === size - 1) && !(board[pacman.pos.x + 1][pacman.pos.y] === 4)) {
+        if (!(pacman.pos.x === sizeX - 1) && !(board[pacman.pos.x + 1][pacman.pos.y] === 4)) {
             newPacman.x = pacman.pos.x + 1
         }
 
@@ -294,6 +332,12 @@ function pushGhost() {
           if(level1[i][j] === 5) {
             board[i][j] = 5; 
       }
+      if(level1[i][j] === 6) {
+        board[i][j] = 6; 
+      }
+        if(level1[i][j] === 7) {
+            board[i][j] = 7; 
+        }
         }
       }
 }

@@ -1,20 +1,7 @@
 body {
     margin: 0;
 }
-hesader {
-    box-sizing: border-box;
-    /*background-image: url("./images/pacmanDown.png");*/
-    color: black;
-    /* width: 840px; */
-    margin: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    -webkit-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
-    -moz-box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
-    box-shadow: 10px 10px 36px 2px rgba(109, 98, 199, 1);
-    text-align: center;
-  }
-  
+
   table {
     border: 1px solid black;
     background-color: black;
@@ -106,8 +93,8 @@ html{
 }
 
 .wrapper {
-    width: 444px;
-    height: 522px;
+    width: 100%;
+    height: 100%;
     display: block;
     margin: auto;
     box-shadow: 10px 10px 36px 2px rgb(67, 44, 235);
@@ -162,25 +149,27 @@ html{
 /* ---------------------------*/
 
 .pinkGhost {
-    background-color:pink;
-    color:pink;
+    width: 5px;
+    height: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 8px 8px 0px 0px;
 }
 
 .pinkGhostLeft {
-    background-image: url("../images/ghostRedLeft.png");
+    background-image: url("../images/ghostPinkLeft.png");
 }
 
 .pinkGhostRight {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPinkRight.png");
 }
 
 .pinkGhostUp{
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPinkRight.png");
 }
 
 .pinkGhostDown {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPinkRight.png");
 }
 
 /* ---------------------------*/
@@ -188,25 +177,27 @@ html{
 /* ---------------------------*/
 
 .purpleGhost {
-    background-color:purple;
-    color:purple;
+    width: 5px;
+    height: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 8px 8px 0px 0px;
 }
 
 .purpleGhostLeft {
-    background-image: url("../images/ghostRedLeft.png");
+    background-image: url("../images/ghostPurpleLeft.png");
 }
 
 .purpleGhostRight {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPurpleRight.png");
 }
 
 .purpleGhostUp{
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPurpleRight.png");
 }
 
 .purpleGhostDown {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostPurpleRight.png");
 }
 
 /* ---------------------------*/
@@ -214,25 +205,27 @@ html{
 /* ---------------------------*/
 
 .orangeGhost {
-    background-color:orange;
-    color:orange;
+    width: 5px;
+    height: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 8px 8px 0px 0px;
 }
 
 .orangeGhostLeft {
-    background-image: url("../images/ghostRedLeft.png");
+    background-image: url("../images/ghostOrangeLeft.png");
 }
 
 .orangeGhostRight {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostOrangeRight.png");
 }
 
 .orangeGhostUp{
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostOrangeRight.png");
 }
 
 .orangeGhostDown {
-    background-image: url("../images/ghostRedRight.png");
+    background-image: url("../images/ghostOrangeRight.png");
 }
 
 
@@ -240,7 +233,7 @@ html{
 /* POPUP*/
 /* ---------------------------*/
 .overlay {
-    background: rgba(0,0,0,.3);
+    background-image: url(../images/background.jpeg);
     position: fixed;/*abarca toda la pantalla*/
     top: 0;
     bottom: 0;
@@ -336,3 +329,7 @@ html{
         opacity: 1;
     }
 }
+
+#audio{
+    display: none
+    }
