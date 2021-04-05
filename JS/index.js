@@ -237,6 +237,7 @@ function printBoard() {
 }
 
 
+
 function movePacman() {
     // pacman.dir ==> 0=up, 1=right, 2=down, 3=left
     const newPacman = { x: pacman.pos.x, y: pacman.pos.y };
@@ -353,6 +354,7 @@ function pushGhost() {
 function newPosition() {
     movePacman();
     checkEat(); // cambio el estado de Board
+
     //board[bigBallPosition.y][bigBallPosition.x] = 2; //Bola grande 
 
 }

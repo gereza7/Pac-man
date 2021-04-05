@@ -21,7 +21,7 @@ body {
       align-items: center;
       font-size: 30px;
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      box-shadow: 0px 10px 35px 2px rgb(67, 44, 235);
+      box-shadow: 0px -5px 20px 4px rgb(67, 44, 235);
       
   }
   
@@ -76,11 +76,12 @@ body {
     padding-top: 0px;
     display: block;
     margin: auto;
-    
+    margin-top: -20px;
+    filter: drop-shadow(2px 2px 5px rgb(1, 102, 254));
 }
 
 html{
-    background-color: #5F94B8;
+    background-color: #000000;
 }
 
 .vida{
@@ -89,6 +90,7 @@ html{
     height: 30px;
     display: flex;
     align-items: flex-start;
+    box-shadow: 10px 
     
    /* display: flex;*/
 
@@ -262,8 +264,21 @@ html{
    transition: .5 ease all; 
    transform: scale(0.7);
    opacity: 0;
-    
+   box-shadow: 0px -5px 20px 14px rgb(67, 44, 235);
  }
+ .gradient-border {
+    --border-width: 3px;
+  
+    position: relative;
+    display: flex;
+    justify-content:
+ }
+ @keyframes moveGradient {
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+ 
  
   .popup h1 {
     font-size: 28px;
@@ -303,7 +318,14 @@ html{
 .popup .btn-submit:hover{
     background: rgba(94, 125, 277, .7);
 }
+
+.ra {
+    height: 100px;
+}
  
+.txt{
+    text-shadow: 1px 1px 2px rgb(10, 223, 247);
+}
  /*******************************/
  /******** ANIMACIONES **********/
  /*******************************/
@@ -330,3 +352,4 @@ html{
         opacity: 1;
     }
 }
+

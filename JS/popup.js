@@ -10,7 +10,7 @@ var btnGame = document.getElementById('btn-submit');
 document.addEventListener("DOMContentLoaded", function(){
     overlay.classList.add('active');
     popup.classList.add('active');
-    sonido.Inicio.play();
+    //sonido.Inicio.play();
 });
 
 btnGame.addEventListener('click', function(){
