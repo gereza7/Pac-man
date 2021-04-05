@@ -47,7 +47,7 @@ mapsPacMan = [
             [4,4,4,4,3,4,4,4,3,4,3,4,4,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
-            [3,3,3,3,3,3,3,4,5,6,7,4,3,3,3,3,3,3,3],
+            [3,3,3,3,3,3,3,4,4,6,7,4,3,3,3,3,3,3,3],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
@@ -103,13 +103,19 @@ const pacman = {
     dir: 3, // 0=up, 1=right, 2=down, 3=left
 };
 
-const ghosts = {
+
+
+/*const ghosts = {
     redGhost :    { dir: 1, x: 9, y: 7, color:"red"},
     pinkGhost :   { dir: 3, x: 9, y: 7, color:"pink"},
     purpleGhost : { dir: 3, x: 9, y: 7, color:"purple"},
     orangeGhost : { dir: 3, x: 9, y: 7, color:"orange"},
-    }
+    }*/
 
+const ghost = {
+    pos: { x: 11, y: 7 },
+    dir: 0, // 0=up, 1=right, 2=down, 3=left
+};
 
 function createBoard() { //Dibujar tablero
    const board = document.getElementById("board");
@@ -129,12 +135,12 @@ function createBoard() { //Dibujar tablero
             if (el === 4) {
                 square.classList.add("wall");
             }
-            if (el === 5) {
-                square.classList.add("redGhostRight");
-            }
-            if (el === 6) {
-                square.classList.add("pinkGhostRight");
-            }
+            // if (el === 5) {
+            //     square.classList.add("redGhostRight");
+            // }
+            // if (el === 6) {
+            //     square.classList.add("pinkGhostRight");
+            // }
             row.appendChild(square);
         });
         board.appendChild(row);
@@ -159,29 +165,12 @@ function printBoard() {
                 }
             }
 
-            function ghostFaceRed(){
-                switch(ghosts.redGhost.dir){
-                    case 0: elem.classList.add("redGhostUp"); break;
-                    case 1: elem.classList.add("redGhostRight"); break;
-                    case 2: elem.classList.add("redGhostDown"); break;
-                    case 3: elem.classList.add("redGhostLeft"); break;
-                }
-            }
-
-            function ghostFacePink(){
-                switch(ghosts.pinkGhost.dir){
-                    case 0: elem.classList.add("pinkGhostUp"); break;
-                    case 1: elem.classList.add("pinkGhostRight"); break;
-                    case 2: elem.classList.add("pinkGhostDown"); break;
-                    case 3: elem.classList.add("pinkGhostLeft"); break;
-                }
-            }
-            function ghostFaceOrange(){
-                switch(ghosts.orangeGhost.dir){
-                    case 0: elem.classList.add("orangeGhostUp"); break;
-                    case 1: elem.classList.add("orangeGhostRight"); break;
-                    case 2: elem.classList.add("orangeGhostDown"); break;
-                    case 3: elem.classList.add("orangeGhostLeft"); break;
+            function ghostFace(ghostElement, color){
+                switch(ghostElement){
+                    case 0: elem.classList.add(color + "GhostUp"); break;
+                    case 1: elem.classList.add(color + "GhostRight"); break;
+                    case 2: elem.classList.add(color + "GhostDown"); break;
+                    case 3: elem.classList.add(color + "GhostLeft"); break;
                 }
             }
             elem.classList.remove("pacman");
@@ -192,21 +181,20 @@ function printBoard() {
             elem.classList.remove("pdown");
             elem.classList.remove("pleft");
             elem.classList.remove("redGhost");
-            elem.classList.remove("orangeGhost");
-            elem.classList.remove("pinkGhost");
             elem.classList.remove("redGhostRight");
-            elem.classList.remove("pinkGhostRight");
-            elem.classList.remove("orangeGhostRight");
+            elem.classList.remove("redGhostUp");
+            elem.classList.remove("redGhostDown");
+            elem.classList.remove("redGhostLeft");
             elem.innerHTML = ''
 
             if (board[r][c] === 0 && pacman.pos.x === r && pacman.pos.y === c) {
                 elem.classList.add("pacman");
                 facePacman();
             }
-            if (board[r][c] === 1) {
-                elem.classList.add("pacman");
-                facePacman();
-            }
+            // if (board[r][c] === 1) {
+            //     elem.classList.add("pacman");
+            //     facePacman();
+            // }
             if (board[r][c] === 2) {
                 elem.classList.add("bigBall");
                 elem.innerHTML = drawBigBall;
@@ -219,17 +207,13 @@ function printBoard() {
             if (board[r][c] === 4) {
                 elem.classList.add("wall");
             }
-            if(board[r][c] === 5) { // ghost RED
+            // if(board[r][c] === 5) { // ghost RED
+            //     elem.classList.add("redGhost");
+            //     ghostFace(ghost.dir, "red");
+            // }
+            if (ghost.pos.x === r && ghost.pos.y === c) {
                 elem.classList.add("redGhost");
-                ghostFaceRed();
-            }
-            if(board[r][c] === 6) { // ghost PINK
-                elem.classList.add("pinkGhost");
-                ghostFacePink();
-            }
-            if(board[r][c] === 7) { // ghost ORANGE
-                elem.classList.add("orangeGhost");
-                ghostFaceOrange();
+                ghostFace(ghost.dir, "red");
             }
 
         });
@@ -268,6 +252,42 @@ function movePacman() {
     }
     pacman.pos = newPacman
 }
+
+function moveGhost() {
+    // ghost.dir ==> 0=up, 1=right, 2=down, 3=left
+    const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
+
+    if (ghost.dir === 0) {
+        if (!(ghost.pos.x === 0) && !(board[ghost.pos.x - 1][ghost.pos.y] === 4)) {
+            newGhost.x = ghost.pos.x - 1
+        }
+        
+    }
+    if (ghost.dir === 1) {
+        if (!(ghost.pos.y === sizeY - 1) && !(board[ghost.pos.x][ghost.pos.y + 1] === 4)) {
+            newGhost.y = ghost.pos.y + 1
+        }
+
+    }
+    if (ghost.dir === 2) {
+        if (!(ghost.pos.x === sizeX - 1) && !(board[ghost.pos.x + 1][ghost.pos.y] === 4)) {
+            newGhost.x = ghost.pos.x + 1
+        }
+
+    }
+    if (ghost.dir === 3) {
+        if (!(ghost.pos.y === 0) && !(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
+
+            newGhost.y = ghost.pos.y - 1
+        }
+
+    }
+    ghost.pos = newGhost
+}
+
+function newDirectionGhost(){
+    ghost.dir = Math.floor(Math.random() * 4);
+} 
 
 function checkEat() {
     if (board[pacman.pos.x][pacman.pos.y] === 3) {
@@ -334,7 +354,8 @@ function pushWall() {
 }
 
 function pushGhost() {
-    for(var i=0; i < sizeX; i++ ) {
+    board [ghost.pos.x][ghost.pos.y] = 5
+    /*for(var i=0; i < sizeX; i++ ) {
         for(var j=0; j < sizeY; j++) {
       
           if(level1[i][j] === 5) {
@@ -347,11 +368,13 @@ function pushGhost() {
             board[i][j] = 7; 
         }
         }
-      }
+      }*/
 }
 
 function newPosition() {
     movePacman();
+    newDirectionGhost();
+    moveGhost();
     checkEat(); // cambio el estado de Board
 
     //board[bigBallPosition.y][bigBallPosition.x] = 2; //Bola grande 
@@ -380,6 +403,7 @@ function animate() {
         //cleanBoard();
         newPosition();
         printBoard();
+        //pushGhost(); //Fantasma
         //Averiguar si no hay mas bolas blancas
         //Puede ser buscando en el Board o Por la puntuación
         gameOver();
@@ -393,7 +417,6 @@ function startLevel() {
     pushWall(); // Muro
     pushSmallBall();// Bola pequeña
     pushBigBall(); //Bola grande
-    pushGhost(); //Fantasma
 }
 startLevel();
 var timerId = requestAnimationFrame(animate);
