@@ -237,7 +237,6 @@ function printBoard() {
 }
 
 
-
 function movePacman() {
     // pacman.dir ==> 0=up, 1=right, 2=down, 3=left
     const newPacman = { x: pacman.pos.x, y: pacman.pos.y };
@@ -359,7 +358,6 @@ function newPosition() {
 
 }
 
-
 function increasePoints(increaseBall) {
     points += increaseBall;
     document.getElementById("points").innerText = points;
@@ -376,7 +374,6 @@ function gameOver() {
     }
   
 }
-
 
 function animate() {
     idTimeOut = setTimeout(function () { //Velocidad de movimiento del PAC-MAN
