@@ -47,7 +47,7 @@ mapsPacMan = [
             [4,4,4,4,3,4,4,4,3,4,3,4,4,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
-            [3,3,3,3,3,3,3,4,4,6,7,4,3,3,3,3,3,3,3],
+            [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,3,3,3,3,3,3,4,3,4,4,4,4],
             [4,4,4,4,3,4,3,4,4,4,4,4,3,4,3,4,4,4,4],
@@ -84,6 +84,8 @@ var points = 0;
 var idTimeOut;
 var lifes = 3;
 
+var pause = false;
+
 const life = document.querySelector("vida")
 const drawLife = `<img class="imgVida" src="../images/vida.png"/>`;
 
@@ -100,22 +102,35 @@ const drawOrangeGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fil
 
 const pacman = {
     pos: { x: 3, y: 3 },
+    posInit: { x: 3, y: 3 },
     dir: 3, // 0=up, 1=right, 2=down, 3=left
-};
+}
 
 
 
-/*const ghosts = {
-    redGhost :    { dir: 1, x: 9, y: 7, color:"red"},
-    pinkGhost :   { dir: 3, x: 9, y: 7, color:"pink"},
-    purpleGhost : { dir: 3, x: 9, y: 7, color:"purple"},
-    orangeGhost : { dir: 3, x: 9, y: 7, color:"orange"},
-    }*/
+const ghosts = [
+    { 
+        dir: 1, 
+        pos:{ x: 13, y: 1 }
+    },
+    { 
+        dir: 0, 
+        pos:{x: 9, y: 15}
+    },
+    { 
+        dir: 3, 
+        pos:{x: 5, y: 4}
+    },
+    { 
+        dir: 3, 
+        pos:{x: 9, y: 10}
+    }
+]
 
-const ghost = {
-    pos: { x: 11, y: 7 },
-    dir: 0, // 0=up, 1=right, 2=down, 3=left
-};
+// const ghost = {
+//     pos: { x: 11, y: 7 },
+//     dir: 0, // 0=up, 1=right, 2=down, 3=left
+// };
 
 function createBoard() { //Dibujar tablero
    const board = document.getElementById("board");
@@ -185,6 +200,21 @@ function printBoard() {
             elem.classList.remove("redGhostUp");
             elem.classList.remove("redGhostDown");
             elem.classList.remove("redGhostLeft");
+            elem.classList.remove("orangeGhost");
+            elem.classList.remove("orangeGhostRight");
+            elem.classList.remove("orangeGhostUp");
+            elem.classList.remove("orangeGhostDown");
+            elem.classList.remove("orangeGhostLeft");
+            elem.classList.remove("pinkGhost");
+            elem.classList.remove("pinkGhostRight");
+            elem.classList.remove("pinkGhostUp");
+            elem.classList.remove("pinkGhostDown");
+            elem.classList.remove("pinkGhostLeft");
+            elem.classList.remove("purpleGhost");
+            elem.classList.remove("purpleGhostRight");
+            elem.classList.remove("purpleGhostUp");
+            elem.classList.remove("purpleGhostDown");
+            elem.classList.remove("purpleGhostLeft");
             elem.innerHTML = ''
 
             if (board[r][c] === 0 && pacman.pos.x === r && pacman.pos.y === c) {
@@ -211,9 +241,21 @@ function printBoard() {
             //     elem.classList.add("redGhost");
             //     ghostFace(ghost.dir, "red");
             // }
-            if (ghost.pos.x === r && ghost.pos.y === c) {
+            if (ghosts[0].pos.x === r && ghosts[0].pos.y === c) {
                 elem.classList.add("redGhost");
-                ghostFace(ghost.dir, "red");
+                ghostFace(ghosts[0].dir, "red");
+            }
+            if (ghosts[1].pos.x === r && ghosts[1].pos.y === c) {
+                elem.classList.add("orangeGhost");
+                ghostFace(ghosts[1].dir, "orange");
+            }
+            if (ghosts[2].pos.x === r && ghosts[2].pos.y === c) {
+                elem.classList.add("pinkGhost");
+                ghostFace(ghosts[2].dir, "pink");
+            }
+            if (ghosts[3].pos.x === r && ghosts[3].pos.y === c) {
+                elem.classList.add("purpleGhost");
+                ghostFace(ghosts[3].dir, "purple");
             }
 
         });
@@ -253,13 +295,16 @@ function movePacman() {
     pacman.pos = newPacman
 }
 
-function moveGhost() {
+function moveGhost(ghost) {
     // ghost.dir ==> 0=up, 1=right, 2=down, 3=left
+    console.log(ghost)
     const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
 
     if (ghost.dir === 0) {
         if (!(ghost.pos.x === 0) && !(board[ghost.pos.x - 1][ghost.pos.y] === 4)) {
-            newGhost.x = ghost.pos.x - 1
+            if(pacman.pos.x > ghost.pos.x ){
+                newGhost.x = ghost.pos.x - 1
+            }
         }
         
     }
@@ -271,7 +316,9 @@ function moveGhost() {
     }
     if (ghost.dir === 2) {
         if (!(ghost.pos.x === sizeX - 1) && !(board[ghost.pos.x + 1][ghost.pos.y] === 4)) {
-            newGhost.x = ghost.pos.x + 1
+            if(pacman.pos.x < ghost.pos.x ){
+                newGhost.x = ghost.pos.x + 1
+            }
         }
 
     }
@@ -285,8 +332,16 @@ function moveGhost() {
     ghost.pos = newGhost
 }
 
+function moveAllGhosts(){
+    for (var i = 0; i < ghosts.length; i++){
+        moveGhost(ghosts[i])
+    }
+}
+
 function newDirectionGhost(){
-    ghost.dir = Math.floor(Math.random() * 4);
+    for(var i = 0; i < ghosts.length; i++){
+        ghosts[i].dir = Math.floor(Math.random() * 4);
+    }
 } 
 
 function checkEat() {
@@ -303,6 +358,34 @@ function checkEat() {
     }
 }
 
+function eatGhost(){
+    for(var i = 0; i < ghosts.length; i++){
+        isPacmanDead(ghosts[i])
+    }
+}
+
+function isPacmanDead(ghost){
+    if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y) {
+        lifes--
+        removeLifes()
+        cancelAnimationFrame(timerId);
+        pause = true;
+        pacman.pos.x = pacman.posInit.x
+        pacman.pos.y = pacman.posInit.y
+        setTimeout(function(){
+            pause = false
+            timerId = requestAnimationFrame(animate)
+        }, 1000)
+        if(lifes === 0) {
+            cancelAnimationFrame(timerId);
+            window.alert("Game Over")
+            // se acabo el juego
+        } else {
+            // esperar unos segundos y reiniciar el juego con una vida menos
+            //setTimeout(startLevel(), 1000);
+        }
+    }
+}
 
 function cleanBoard() {
     // Limpiar el board
@@ -315,9 +398,13 @@ function checkLifes(){
 }
 
 function printLifes(){
-    for(var i = 0; i < 3; i++){
+    for(var i = 0; i < lifes; i++){
         document.getElementById("life").appendChild(document.createElement("div")).innerHTML= drawLife;
     }
+}
+
+function removeLifes(){
+    document.getElementById("life").lastChild.remove() //lastChild(document.createElement("life")).= drawLife;
 }
 
 function pushSmallBall() {
@@ -374,7 +461,8 @@ function pushGhost() {
 function newPosition() {
     movePacman();
     newDirectionGhost();
-    moveGhost();
+    moveAllGhosts()
+    eatGhost();
     checkEat(); // cambio el estado de Board
 
     //board[bigBallPosition.y][bigBallPosition.x] = 2; //Bola grande 
@@ -407,7 +495,9 @@ function animate() {
         //Averiguar si no hay mas bolas blancas
         //Puede ser buscando en el Board o Por la puntuación
         gameOver();
-        requestAnimationFrame(animate);
+        if (lifes > 0 && !pause){
+            timerId = requestAnimationFrame(animate);
+        }
     }, 300)
 }
 
@@ -435,3 +525,6 @@ document.addEventListener("keydown", function (event) {
         pacman.dir = 3;
     }
 });
+
+
+

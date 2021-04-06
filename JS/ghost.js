@@ -104,3 +104,91 @@ function checkGame() {
         }
     }
 }
+
+
+
+
+
+function checkCollision(){
+    if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y) {
+        clearTimeOut(idTimeOut);
+        lifes --; 
+        if(lifes === 0) {
+            // se acabo el juego
+        } else {
+            // esperar unos segundos y reiniciar el juego con una vida menos
+            setTimeout(startLevel(), 1000);
+        }
+    }
+}
+function moveGhost() {
+    // if(pacman.pos.x > ghost.pos.x ) // mover el fantasma hacia arriba
+    // if(pacman.pos.x < ghost.pos.x ) // hacia abajo
+    // if(pacman.pos.y > ghost.pos.y ) // mover el fantasma hacia la derecha
+    // if(pacman.pos.y < ghost.pos.y ) // hacia izquierda
+    // ghost.dir ==> 0=horizontal, 1=vertical, 2=down, 3=left
+    const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
+
+    if (ghost.dir === 0) {
+        if (!(ghost.pos.x === 0) && !(board[ghost.pos.x - 1][ghost.pos.y] === 4)) {
+            newGhost.x = ghost.pos.x - 1
+        }
+
+    }
+    if (ghost.dir === 1) {
+        if (!(ghost.pos.y === sizeY - 1) && !(board[ghost.pos.x][ghost.pos.y + 1] === 4)) {
+            newGhost.y = ghost.pos.y + 1
+        }
+
+    }
+    if (ghost.dir === 2) {
+        if (!(ghost.pos.x === sizeX - 1) && !(board[ghost.pos.x + 1][ghost.pos.y] === 4)) {
+            newGhost.x = ghost.pos.x + 1
+        }
+
+    }
+    if (ghost.dir === 3) {
+        if (!(ghost.pos.y === 0) && !(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
+
+            newGhost.y = ghost.pos.y - 1
+        }
+
+    }
+    ghost.pos = newGhost
+}
+
+
+function moveGhost() {
+    // if(pacman.pos.x > ghost.pos.x ) // mover el fantasma hacia arriba
+    // if(pacman.pos.x < ghost.pos.x ) // hacia abajo
+    // if(pacman.pos.y > ghost.pos.y ) // mover el fantasma hacia la derecha
+    // if(pacman.pos.y < ghost.pos.y ) // hacia izquierda
+    // ghost.dir ==> 0=horizontal, 1=vertical,
+    const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
+
+    if (ghost.dir === 1) {
+        if (!(ghost.pos.x === 0) && !(board[ghost.pos.x - 1][ghost.pos.y] === 4)) {
+            if(pacman.pos.x > ghost.pos.x ){
+                newGhost.x = ghost.pos.x - 1
+            }
+        } else if (!(ghost.pos.x === sizeX - 1) && !(board[ghost.pos.x + 1][ghost.pos.y] === 4)) {
+            if(pacman.pos.x < ghost.pos.x ){
+                newGhost.x = ghost.pos.x + 1
+            }
+        }
+    }
+
+    if (ghost.dir === 0) {
+        if (!(ghost.pos.y === sizeY - 1) && !(board[ghost.pos.x][ghost.pos.y + 1] === 4)) {
+            if(pacman.pos.y > ghost.pos.y ){
+            newGhost.y = ghost.pos.y + 1
+            }
+        }else if (!(ghost.pos.y === 0) && !(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
+            if(pacman.pos.y < ghost.pos.y ){
+            newGhost.y = ghost.pos.y - 1
+            }
+        }
+
+    }
+    ghost.pos = newGhost
+}

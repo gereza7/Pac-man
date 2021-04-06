@@ -27,3 +27,4 @@ function startMusic(){
     audioElement.volume = 0.06;
     audioElement.play();
 };
+
