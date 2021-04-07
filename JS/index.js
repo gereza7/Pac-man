@@ -99,11 +99,12 @@ const pointGhost=150;
 const drawRedGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="red"/></svg>`;
 const drawPinkGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="pink"/></svg>`;
 const drawOrangeGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="orange"/></svg>`;
-
+const drawPurpleGhost = `<svg height="10" width="10"><circle cx=5 cy=5 r="6" fill="purple"/></svg>`;
 const pacman = {
     pos: { x: 3, y: 3 },
     posInit: { x: 3, y: 3 },
     dir: 3, // 0=up, 1=right, 2=down, 3=left
+    invencible: false,
 }
 
 
@@ -111,22 +112,30 @@ const ghosts = [
     { 
         dir: 1, 
         pos:{ x: 13, y: 1 },
-        color: "red"
+        posInit:{x: 13, y: 1},
+        color: "red",
+        dead: false,
     },
     { 
         dir: 0, 
         pos:{x: 9, y: 15},
-        color: "orange"
+        posInit:{x: 9, y: 15},
+        color: "orange",
+        dead: false,
     },
     { 
         dir: 3, 
         pos:{x: 5, y: 4},
-        color: "pink"
+        posInit:{x: 5, y: 4},
+        color: "pink",
+        dead: false,
     },
     { 
         dir: 3, 
         pos:{x: 9, y: 10},
-        color: "purple"
+        posInit:{x: 9, y: 10},
+        color: "purple",
+        dead: false,
     }
 ]
 
@@ -170,16 +179,66 @@ function createBoard() { //Dibujar tablero
 //Conectar HTML con JS
 var board = new Array(sizeX).fill(null).map((e) => new Array(sizeY).fill(null));
 
+function clearStyles(elem){
+    elem.classList.remove("pacman");
+    elem.classList.remove("bigBall");
+    elem.classList.remove("smallBall");
+    elem.classList.remove("pup");
+    elem.classList.remove("pright");
+    elem.classList.remove("pdown");
+    elem.classList.remove("pleft");
+    elem.classList.remove("pupBlue");
+    elem.classList.remove("prightBlue");
+    elem.classList.remove("pdownBlue");
+    elem.classList.remove("pleftBlue");
+    elem.classList.remove("redGhost");
+    elem.classList.remove("redGhostRight");
+    elem.classList.remove("redGhostUp");
+    elem.classList.remove("redGhostDown");
+    elem.classList.remove("redGhostLeft");
+    elem.classList.remove("orangeGhost");
+    elem.classList.remove("orangeGhostRight");
+    elem.classList.remove("orangeGhostUp");
+    elem.classList.remove("orangeGhostDown");
+    elem.classList.remove("orangeGhostLeft");
+    elem.classList.remove("pinkGhost");
+    elem.classList.remove("pinkGhostRight");
+    elem.classList.remove("pinkGhostUp");
+    elem.classList.remove("pinkGhostDown");
+    elem.classList.remove("pinkGhostLeft");
+    elem.classList.remove("purpleGhost");
+    elem.classList.remove("purpleGhostRight");
+    elem.classList.remove("purpleGhostUp");
+    elem.classList.remove("purpleGhostDown");
+    elem.classList.remove("purpleGhostLeft");
+    elem.innerHTML = ''
+}
 function printBoard() {
     board.forEach((row, r) => {
         row.forEach((col, c) => {
             const elem = document.querySelector(`.row${r + 1}>.col${c + 1}`);
             function facePacman (){
                 switch(pacman.dir){
-                    case 0: elem.classList.add("pup"); break;
-                    case 1: elem.classList.add("pright"); break;
-                    case 2: elem.classList.add("pdown"); break;
-                    case 3: elem.classList.add("pleft"); break;
+                    case 0: if(pacman.invencible){
+                        elem.classList.add("pupBlue");
+                    }else {
+                        elem.classList.add("pup");
+                    } break; 
+                    case 1:if(pacman.invencible){
+                        elem.classList.add("prightBlue");
+                    }else {
+                        elem.classList.add("pright");
+                    } break;
+                    case 2: if(pacman.invencible){
+                        elem.classList.add("pdownBlue");
+                    }else {
+                        elem.classList.add("pdown");
+                    } break;
+                    case 3:if(pacman.invencible){
+                        elem.classList.add("pleftBlue");
+                    }else {
+                        elem.classList.add("pleft");
+                    } break;
                 }
             }
 
@@ -191,34 +250,8 @@ function printBoard() {
                     case 3: elem.classList.add(color + "GhostLeft"); break;
                 }
             }
-            elem.classList.remove("pacman");
-            elem.classList.remove("bigBall");
-            elem.classList.remove("smallBall");
-            elem.classList.remove("pup");
-            elem.classList.remove("pright");
-            elem.classList.remove("pdown");
-            elem.classList.remove("pleft");
-            elem.classList.remove("redGhost");
-            elem.classList.remove("redGhostRight");
-            elem.classList.remove("redGhostUp");
-            elem.classList.remove("redGhostDown");
-            elem.classList.remove("redGhostLeft");
-            elem.classList.remove("orangeGhost");
-            elem.classList.remove("orangeGhostRight");
-            elem.classList.remove("orangeGhostUp");
-            elem.classList.remove("orangeGhostDown");
-            elem.classList.remove("orangeGhostLeft");
-            elem.classList.remove("pinkGhost");
-            elem.classList.remove("pinkGhostRight");
-            elem.classList.remove("pinkGhostUp");
-            elem.classList.remove("pinkGhostDown");
-            elem.classList.remove("pinkGhostLeft");
-            elem.classList.remove("purpleGhost");
-            elem.classList.remove("purpleGhostRight");
-            elem.classList.remove("purpleGhostUp");
-            elem.classList.remove("purpleGhostDown");
-            elem.classList.remove("purpleGhostLeft");
-            elem.innerHTML = ''
+            
+            clearStyles(elem);
 
             if (board[r][c] === 0 && pacman.pos.x === r && pacman.pos.y === c) {
                 elem.classList.add("pacman");
@@ -244,19 +277,20 @@ function printBoard() {
             //     elem.classList.add("redGhost");
             //     ghostFace(ghost.dir, "red");
             // }
-            if (ghosts[0].pos.x === r && ghosts[0].pos.y === c) {
+            
+            if (ghosts[0].pos.x === r && ghosts[0].pos.y === c && !ghosts[0].dead) {
                 elem.classList.add("redGhost");
                 ghostFace(ghosts[0].dir, "red");
             }
-            if (ghosts[1].pos.x === r && ghosts[1].pos.y === c) {
+            if (ghosts[1].pos.x === r && ghosts[1].pos.y === c && !ghosts[1].dead) {
                 elem.classList.add("orangeGhost");
                 ghostFace(ghosts[1].dir, "orange");
             }
-            if (ghosts[2].pos.x === r && ghosts[2].pos.y === c) {
+            if (ghosts[2].pos.x === r && ghosts[2].pos.y === c && !ghosts[2].dead) {
                 elem.classList.add("pinkGhost");
                 ghostFace(ghosts[2].dir, "pink");
             }
-            if (ghosts[3].pos.x === r && ghosts[3].pos.y === c) {
+            if (ghosts[3].pos.x === r && ghosts[3].pos.y === c && !ghosts[3].dead) {
                 elem.classList.add("purpleGhost");
                 ghostFace(ghosts[3].dir, "purple");
             }
@@ -328,43 +362,43 @@ function moveGhost(ghost) {
     const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
 
     if (ghost.dir === 0) {
-        if(!(board[ghost.pos.x - 1][ghost.pos.y] === 4)){
+        // if(!(board[ghost.pos.x - 1][ghost.pos.y] === 4)){
             if (!(ghost.pos.x === 0)) {
                 newGhost.x = ghost.pos.x - 1
             } else {
-                newGhost.x = sizeX;
+                newGhost.x = sizeX - 1;
             }
-        }
+        // }
     }
 
     if (ghost.dir === 1) {
-        if(!(board[ghost.pos.x][ghost.pos.y + 1] === 4)){
+        // if(!(board[ghost.pos.x][ghost.pos.y + 1] === 4)){
             if (!(ghost.pos.y === sizeY - 1)) {
                 newGhost.y = ghost.pos.y + 1
             } else {
                 newGhost.y = 0;
             }
-        }
+        // }
     }
 
     if (ghost.dir === 2) {
-        if(!(board[ghost.pos.x + 1][ghost.pos.y] === 4)){
+        // if(!(board[ghost.pos.x + 1][ghost.pos.y] === 4)){
             if (!(ghost.pos.x === sizeX - 1)) {
                 newGhost.x = ghost.pos.x + 1
             } else {
                 newGhost.x = 0;
             }
-        }
+        // }
     }
 
     if (ghost.dir === 3) {
-        if(!(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
+        // if(!(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
             if (!(ghost.pos.y === 0)) {
                 newGhost.y = ghost.pos.y - 1
             } else {
-                newGhost.y = sizeY;
+                newGhost.y = sizeY - 1;
             }
-        }
+        // }
        
     }
     ghost.pos = newGhost
@@ -377,8 +411,8 @@ function moveAllGhosts(){
 }
 
 const gCanUp = g => (!(g.pos.x === 0) && !(board[g.pos.x - 1][g.pos.y] === 4));
-const gCanRight = g => (!(g.pos.y === sizeY) && !(board[g.pos.x][g.pos.y + 1] === 4));
-const gCanDown = g => (!(g.pos.x === sizeX) && !(board[g.pos.x + 1][g.pos.y] === 4));
+const gCanRight = g => (!(g.pos.y === sizeY - 1) && !(board[g.pos.x][g.pos.y + 1] === 4));
+const gCanDown = g => (!(g.pos.x === sizeX - 1) && !(board[g.pos.x + 1][g.pos.y] === 4));
 const gCanLeft = g =>(!(g.pos.y === 0) && !(board[g.pos.x][g.pos.y - 1] === 4));
 
 function newDirectionGhost(){
@@ -408,6 +442,13 @@ function newDirectionGhost(){
     // }
 } 
 
+function invenciblePacman(){
+    pacman.invencible = true
+    setTimeout(function(){
+        pacman.invencible = false
+    }, 30000)
+}
+
 function checkEat() {
     if (board[pacman.pos.x][pacman.pos.y] === 3) {
         board[pacman.pos.x][pacman.pos.y] = 0;
@@ -419,6 +460,7 @@ function checkEat() {
         board[pacman.pos.x][pacman.pos.y] = 0;
         increasePoints(pointBigBall);
         BigBallSound.sound.play();
+        invenciblePacman();
     }
 }
 
@@ -449,10 +491,23 @@ const gameOverSound = {
     aud.muted = false;
   } 
 
+  var imagenVolumen = "On";
+
+//   function volume(){
+//       var imagen = document.getElementById("foto1");
+//       if(imagenVolumen == "On"){
+//           imagen.src = "./images/Play.png";
+//           imagenVolumen = "Pause";
+//       }
+//       else {
+//           imagen.src = "./images/Pause.png";
+//           imagenVolumen = "On"
+//       }
+//   }
   //
   
 function isPacmanDead(ghost){
-    if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y) {
+    if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y && !pacman.invencible && !ghost.dead) {
         lifes--
         removeLifes()
         cancelAnimationFrame(timerId);
@@ -476,6 +531,20 @@ function isPacmanDead(ghost){
             // esperar unos segundos y reiniciar el juego con una vida menos
             //setTimeout(startLevel(), 1000);
         }
+    } else if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y && pacman.invencible && !ghost.dead) {
+        ghost.dead = true
+        const elem = document.querySelector(`.row${ghost.pos.x + 1}>.col${ghost.pos.y + 1}`);
+            elem.classList.remove(ghost.color + "Ghost");
+            elem.classList.remove(ghost.color + "GhostRight");
+            elem.classList.remove(ghost.color + "GhostUp");
+            elem.classList.remove(ghost.color + "GhostDown");
+            elem.classList.remove(ghost.color + "GhostLeft");
+        points += 500;
+        setTimeout(function(){
+            ghost.pos.x = ghost.posInit.x
+            ghost.pos.y = ghost.posInit.y
+            ghost.dead = false
+        }, 5000)
     }
 }
 
@@ -582,8 +651,8 @@ function startLevel() {
     pushSmallBall();// Bola pequeña
     pushBigBall(); //Bola grande
 }
-startLevel();
-var timerId = requestAnimationFrame(animate);
+
+var timerId
 
 document.addEventListener("keydown", function (event) {
     if (event.code === "ArrowUp") {

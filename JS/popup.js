@@ -18,6 +18,8 @@ btnGame.addEventListener('click', function(){
     popup.classList.remove('active');
     sonido.Inicio.pause();
     startMusic();
+    startLevel();
+    timerId = requestAnimationFrame(animate);
 });
 
 function startMusic(){

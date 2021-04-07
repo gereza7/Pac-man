@@ -33,9 +33,9 @@ body {
   }
 
 .pacman {
-    border-radius: 90px;
-    width: auto;
-    height: auto;
+    border-radius: 50px;
+    width: 30px;
+    height: 26px;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -54,6 +54,22 @@ body {
 
 .pdown {
     background-image: url("../images/pacmanDown.png");
+}
+
+.prightBlue {
+    background-image: url("../images/pacmanRightBlue.png");
+}
+
+.pleftBlue {
+    background-image: url("../images/pacmanLeftBlue.png");
+}
+
+.pupBlue {
+    background-image: url("../images/pacmanUpBlue.png");
+}
+
+.pdownBlue {
+    background-image: url("../images/pacmanDownBlue.png");
 }
 
 .smallBall, .bigBall {
@@ -124,8 +140,8 @@ html{
 .redGhost {
     /*background-color:Red;
     color:red;*/
-    width: 5px;
-    height: 5px;
+    width: 30px;
+    height: 26px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8px 8px 0px 0px;
@@ -152,8 +168,8 @@ html{
 /* ---------------------------*/
 
 .pinkGhost {
-    width: 5px;
-    height: 5px;
+    width: 30px;
+    height: 26px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8px 8px 0px 0px;
@@ -180,8 +196,8 @@ html{
 /* ---------------------------*/
 
 .purpleGhost {
-    width: 5px;
-    height: 5px;
+    width: 30px;
+    height: 26px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8px 8px 0px 0px;
@@ -208,8 +224,8 @@ html{
 /* ---------------------------*/
 
 .orangeGhost {
-    width: 5px;
-    height: 5px;
+    width: 30px;
+    height: 26px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8px 8px 0px 0px;
