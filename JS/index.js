@@ -257,10 +257,6 @@ function printBoard() {
                 elem.classList.add("pacman");
                 facePacman();
             }
-            // if (board[r][c] === 1) {
-            //     elem.classList.add("pacman");
-            //     facePacman();
-            // }
             if (board[r][c] === 2) {
                 elem.classList.add("bigBall");
                 elem.innerHTML = drawBigBall;
@@ -273,10 +269,6 @@ function printBoard() {
             if (board[r][c] === 4) {
                 elem.classList.add("wall");
             }
-            // if(board[r][c] === 5) { // ghost RED
-            //     elem.classList.add("redGhost");
-            //     ghostFace(ghost.dir, "red");
-            // }
             
             if (ghosts[0].pos.x === r && ghosts[0].pos.y === c && !ghosts[0].dead) {
                 elem.classList.add("redGhost");
@@ -348,11 +340,7 @@ function movePacman() {
     pacman.pos = newPacman
 }
 
-// function gCanUp(g){
-//     if(!(g.pos.x === 0) && !(board[g.pos.x - 1][g.pos.y] === 4)) {
-//         return true;
-//     } else  return false;
-// }
+
 
 
 
@@ -621,8 +609,10 @@ function gameOver() {
     var lengtSBall=document.querySelectorAll(".smallBall").length;
     var lengtBBall=document.querySelectorAll(".bigBall").length;
 
-    if( lengtSBall === 0 && lengtBBall === 0 )  {
-        alert("You WIN!!!!");
+    if( lengtSBall === 0 && lengtBBall === 0)  {
+        swal("YOU WIN", "DO YOU WANT TO PLAY AGAIN?", "success").then(function() {
+            window.location = "index.html";
+        });
         clearTimeOut(idTimeOut);
         wakawaka.soundWaka.pause();
     }
