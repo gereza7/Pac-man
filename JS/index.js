@@ -1,16 +1,16 @@
 mapsPacMan = [
     { 
         map :[
-              [2,3,3,3,3,3,3,3,3,2],
-              [3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,3,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3],
-              [3,3,3,3,4,3,3,3,3,3],
+              [4,4,4,4,4,4,4,4,4,4],
+              [4,2,3,3,3,3,3,3,3,4],
+              [4,3,3,3,3,3,3,3,3,4],
+              [4,3,3,3,4,3,3,3,3,4],
+              [4,3,3,3,4,3,3,3,3,4],
               [3,3,3,3,4,4,4,3,3,3],
-              [3,3,3,3,3,3,3,5,3,3],
-              [3,3,2,3,4,4,4,3,3,3],
-              [3,3,3,3,3,3,3,3,3,3],
-              [2,3,3,3,3,3,3,3,3,2]     
+              [4,3,3,3,3,3,3,5,3,4],
+              [4,3,2,3,4,4,4,3,3,4],
+              [4,2,3,3,3,3,3,3,2,4],
+              [4,4,4,4,4,4,4,4,4,4]     
             ],
         sizeX: 10,
         sizeY: 10
@@ -107,23 +107,26 @@ const pacman = {
 }
 
 
-
 const ghosts = [
     { 
         dir: 1, 
-        pos:{ x: 13, y: 1 }
+        pos:{ x: 13, y: 1 },
+        color: "red"
     },
     { 
         dir: 0, 
-        pos:{x: 9, y: 15}
+        pos:{x: 9, y: 15},
+        color: "orange"
     },
     { 
         dir: 3, 
-        pos:{x: 5, y: 4}
+        pos:{x: 5, y: 4},
+        color: "pink"
     },
     { 
         dir: 3, 
-        pos:{x: 9, y: 10}
+        pos:{x: 9, y: 10},
+        color: "purple"
     }
 ]
 
@@ -268,66 +271,101 @@ function movePacman() {
     const newPacman = { x: pacman.pos.x, y: pacman.pos.y };
 
     if (pacman.dir === 0) {
-        if (!(pacman.pos.x === 0) && !(board[pacman.pos.x - 1][pacman.pos.y] === 4)) {
-            newPacman.x = pacman.pos.x - 1
+        if(!(board[pacman.pos.x - 1][pacman.pos.y] === 4)) {
+            if (!(pacman.pos.x === 0) ) {
+                newPacman.x = pacman.pos.x - 1;
+            } else {
+                newPacman.x = sizeX - 1;
+            }
         }
-        
+ 
     }
     if (pacman.dir === 1) {
-        if (!(pacman.pos.y === sizeY - 1) && !(board[pacman.pos.x][pacman.pos.y + 1] === 4)) {
+        if(!(board[pacman.pos.x][pacman.pos.y + 1] === 4)){
+          if(!(pacman.pos.y === sizeY - 1)) {
             newPacman.y = pacman.pos.y + 1
+          } else {
+            newPacman.y = 0;
+          }
         }
-
     }
+
     if (pacman.dir === 2) {
-        if (!(pacman.pos.x === sizeX - 1) && !(board[pacman.pos.x + 1][pacman.pos.y] === 4)) {
-            newPacman.x = pacman.pos.x + 1
+        if(!(board[pacman.pos.x + 1][pacman.pos.y] === 4)){
+            if (!(pacman.pos.x === sizeX - 1)) {
+                newPacman.x = pacman.pos.x + 1
+            } else {
+                newPacman.x = 0;
+            }
         }
+        
 
     }
     if (pacman.dir === 3) {
-        if (!(pacman.pos.y === 0) && !(board[pacman.pos.x][pacman.pos.y - 1] === 4)) {
-
-            newPacman.y = pacman.pos.y - 1
+        if(!(board[pacman.pos.x][pacman.pos.y - 1] === 4)) {
+            if (!(pacman.pos.y === 0)) {
+                newPacman.y = pacman.pos.y - 1;
+            } else {
+                newPacman.y = sizeY - 1;
+            }
         }
-
     }
+
     pacman.pos = newPacman
 }
 
+// function gCanUp(g){
+//     if(!(g.pos.x === 0) && !(board[g.pos.x - 1][g.pos.y] === 4)) {
+//         return true;
+//     } else  return false;
+// }
+
+
+
 function moveGhost(ghost) {
     // ghost.dir ==> 0=up, 1=right, 2=down, 3=left
-    console.log(ghost)
+
     const newGhost = { x: ghost.pos.x, y: ghost.pos.y };
 
     if (ghost.dir === 0) {
-        if (!(ghost.pos.x === 0) && !(board[ghost.pos.x - 1][ghost.pos.y] === 4)) {
-            if(pacman.pos.x > ghost.pos.x ){
+        if(!(board[ghost.pos.x - 1][ghost.pos.y] === 4)){
+            if (!(ghost.pos.x === 0)) {
                 newGhost.x = ghost.pos.x - 1
+            } else {
+                newGhost.x = sizeX;
             }
         }
-        
     }
+
     if (ghost.dir === 1) {
-        if (!(ghost.pos.y === sizeY - 1) && !(board[ghost.pos.x][ghost.pos.y + 1] === 4)) {
-            newGhost.y = ghost.pos.y + 1
-        }
-
-    }
-    if (ghost.dir === 2) {
-        if (!(ghost.pos.x === sizeX - 1) && !(board[ghost.pos.x + 1][ghost.pos.y] === 4)) {
-            if(pacman.pos.x < ghost.pos.x ){
-                newGhost.x = ghost.pos.x + 1
+        if(!(board[ghost.pos.x][ghost.pos.y + 1] === 4)){
+            if (!(ghost.pos.y === sizeY - 1)) {
+                newGhost.y = ghost.pos.y + 1
+            } else {
+                newGhost.y = 0;
             }
         }
-
     }
-    if (ghost.dir === 3) {
-        if (!(ghost.pos.y === 0) && !(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
 
-            newGhost.y = ghost.pos.y - 1
+    if (ghost.dir === 2) {
+        if(!(board[ghost.pos.x + 1][ghost.pos.y] === 4)){
+            if (!(ghost.pos.x === sizeX - 1)) {
+                newGhost.x = ghost.pos.x + 1
+            } else {
+                newGhost.x = 0;
+            }
         }
+    }
 
+    if (ghost.dir === 3) {
+        if(!(board[ghost.pos.x][ghost.pos.y - 1] === 4)) {
+            if (!(ghost.pos.y === 0)) {
+                newGhost.y = ghost.pos.y - 1
+            } else {
+                newGhost.y = sizeY;
+            }
+        }
+       
     }
     ghost.pos = newGhost
 }
@@ -338,10 +376,36 @@ function moveAllGhosts(){
     }
 }
 
+const gCanUp = g => (!(g.pos.x === 0) && !(board[g.pos.x - 1][g.pos.y] === 4));
+const gCanRight = g => (!(g.pos.y === sizeY) && !(board[g.pos.x][g.pos.y + 1] === 4));
+const gCanDown = g => (!(g.pos.x === sizeX) && !(board[g.pos.x + 1][g.pos.y] === 4));
+const gCanLeft = g =>(!(g.pos.y === 0) && !(board[g.pos.x][g.pos.y - 1] === 4));
+
 function newDirectionGhost(){
-    for(var i = 0; i < ghosts.length; i++){
-        ghosts[i].dir = Math.floor(Math.random() * 4);
-    }
+    ghosts.forEach(function(g){
+        const position = [
+            g.dir !== 2 && gCanUp(g) ? 1 : 0,    // sino va para abajo pero puede ir arriba
+            g.dir !== 3 && gCanRight(g) ? 1 : 0, // sino va a la izq pero puede ir a la der
+            g.dir !== 0 && gCanDown(g) ? 1 : 0,  // sino va para arriba pero puede ir abajo
+            g.dir !== 1 && gCanLeft(g) ? 1 : 0   // sino va a la der pero puede ir a la izq
+        ];
+    
+        const sum=position.reduce((a,b) => a+b);  
+        // Obtenemos un numero aleatorio entre los posibles movimientos
+        const random=Math.floor(Math.random() * sum);
+
+        // Devolvemos el siguiente movimiento del fantasma [0-up|1-right|2-down|3-left]
+        for (let i=0, pos=-1; i<position.length; i++) {
+            pos = position[i] ===1 ? pos+1 : pos;
+            if (pos === random) {
+                g.dir = i;
+                break;     
+            }  
+        }
+    });
+    // for(var i = 0; i < ghosts.length; i++){
+    //     ghosts[i].dir = Math.floor(Math.random() * 4);
+    // }
 } 
 
 function checkEat() {
@@ -364,6 +428,17 @@ function eatGhost(){
     }
 }
 
+// AUDIO
+var x = document.getElementById("audioPrincipal");
+function pauseAudio(){
+    x.pause();
+}
+
+const gameOverSound = {
+    Inicio: new Audio("./Sounds/gameOver.mp3")
+  };
+  //
+  
 function isPacmanDead(ghost){
     if (ghost.pos.x === pacman.pos.x && ghost.pos.y === pacman.pos.y) {
         lifes--
@@ -378,7 +453,12 @@ function isPacmanDead(ghost){
         }, 1000)
         if(lifes === 0) {
             cancelAnimationFrame(timerId);
-            window.alert("Game Over")
+            swal("GAME OVER", "DO YOU WANT TO PLAY AGAIN?", "error").then(function() {
+                window.location = "index.html";
+            });
+            pauseAudio();
+            gameOverSound.Inicio.play();
+            
             // se acabo el juego
         } else {
             // esperar unos segundos y reiniciar el juego con una vida menos
@@ -440,23 +520,7 @@ function pushWall() {
       }
 }
 
-function pushGhost() {
-    board [ghost.pos.x][ghost.pos.y] = 5
-    /*for(var i=0; i < sizeX; i++ ) {
-        for(var j=0; j < sizeY; j++) {
-      
-          if(level1[i][j] === 5) {
-            board[i][j] = 5; 
-      }
-      if(level1[i][j] === 6) {
-        board[i][j] = 6; 
-      }
-        if(level1[i][j] === 7) {
-            board[i][j] = 7; 
-        }
-        }
-      }*/
-}
+
 
 function newPosition() {
     movePacman();
@@ -464,8 +528,6 @@ function newPosition() {
     moveAllGhosts()
     eatGhost();
     checkEat(); // cambio el estado de Board
-
-    //board[bigBallPosition.y][bigBallPosition.x] = 2; //Bola grande 
 
 }
 
@@ -525,6 +587,5 @@ document.addEventListener("keydown", function (event) {
         pacman.dir = 3;
     }
 });
-
 
 
