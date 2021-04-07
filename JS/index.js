@@ -437,6 +437,18 @@ function pauseAudio(){
 const gameOverSound = {
     Inicio: new Audio("./Sounds/gameOver.mp3")
   };
+
+  var aud = document.getElementById("audioPrincipal");
+  
+
+  function enableMute() { 
+    aud.muted = true;
+  } 
+  
+  function disableMute() { 
+    aud.muted = false;
+  } 
+
   //
   
 function isPacmanDead(ghost){
@@ -587,5 +599,3 @@ document.addEventListener("keydown", function (event) {
         pacman.dir = 3;
     }
 });
-
-

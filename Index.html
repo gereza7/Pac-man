@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,10 +18,15 @@
         <audio loop id="audioPrincipal" id="myAudio1">
           <source src="./Sounds/musica.wav" type="audio/wav">
       </audio>
+      
     </header>
+    <div onclick="enableMute()" type="button"><img src="./images/Pause.png" class="minus"></div>
+    <div onclick="disableMute()" type="button"><img  src="./images/Play.png" class="minus" ></div><div> 
     <div class="wrapper">
         <div class="score">
-            <div class="puntuacion"> Score: <span id="points"> 0 </span></div> <div> <div class="vida" id="life"></div></div>
+            <div class="puntuacion"> Score: <span id="points"> 0 </span></div> 
+          
+      <div class="vida" id="life"></div></div>
         </div>
         <table id="board"> 
         </table>
