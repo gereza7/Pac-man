@@ -269,23 +269,30 @@ function printBoard() {
             if (board[r][c] === 4) {
                 elem.classList.add("wall");
             }
-            
-            if (ghosts[0].pos.x === r && ghosts[0].pos.y === c && !ghosts[0].dead) {
-                elem.classList.add("redGhost");
-                ghostFace(ghosts[0].dir, "red");
+            for(let i =0; i < ghosts.length ; i++) {
+                if (ghosts[i].pos.x === r && ghosts[i].pos.y === c && !ghosts[i].dead) {
+                    elem.innerHTML = '';
+                    let color = ghosts[i].color;
+                    elem.classList.add(color + "Ghost");
+                    ghostFace(ghosts[i].dir, color);
+                }  
             }
-            if (ghosts[1].pos.x === r && ghosts[1].pos.y === c && !ghosts[1].dead) {
-                elem.classList.add("orangeGhost");
-                ghostFace(ghosts[1].dir, "orange");
-            }
-            if (ghosts[2].pos.x === r && ghosts[2].pos.y === c && !ghosts[2].dead) {
-                elem.classList.add("pinkGhost");
-                ghostFace(ghosts[2].dir, "pink");
-            }
-            if (ghosts[3].pos.x === r && ghosts[3].pos.y === c && !ghosts[3].dead) {
-                elem.classList.add("purpleGhost");
-                ghostFace(ghosts[3].dir, "purple");
-            }
+            // if (ghosts[0].pos.x === r && ghosts[0].pos.y === c && !ghosts[0].dead) {
+            //     elem.classList.add("redGhost");
+            //     ghostFace(ghosts[0].dir, "red");
+            // }
+            // if (ghosts[1].pos.x === r && ghosts[1].pos.y === c && !ghosts[1].dead) {
+            //     elem.classList.add("orangeGhost");
+            //     ghostFace(ghosts[1].dir, "orange");
+            // }
+            // if (ghosts[2].pos.x === r && ghosts[2].pos.y === c && !ghosts[2].dead) {
+            //     elem.classList.add("pinkGhost");
+            //     ghostFace(ghosts[2].dir, "pink");
+            // }
+            // if (ghosts[3].pos.x === r && ghosts[3].pos.y === c && !ghosts[3].dead) {
+            //     elem.classList.add("purpleGhost");
+            //     ghostFace(ghosts[3].dir, "purple");
+            // }
 
         });
     });
