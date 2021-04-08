@@ -87,7 +87,7 @@ var lifes = 3;
 var pause = false;
 
 const life = document.querySelector("vida")
-const drawLife = `<img class="imgVida" src="../images/vida.png"/>`;
+const drawLife = `<img class="imgVida" src="./images/vida.png"/>`;
 
 const pointSmallBall = 10;
 const drawSmallBall = `<svg height="10" width="10"><circle cx=3 cy=3 r="3" fill="white"/></svg>`
