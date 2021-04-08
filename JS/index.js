@@ -434,7 +434,7 @@ function invenciblePacman(){
     pacman.invencible = true
     setTimeout(function(){
         pacman.invencible = false
-    }, 30000)
+    }, 10000)
 }
 
 function checkEat() {
@@ -484,7 +484,7 @@ const gameOverSound = {
 //   function volume(){
 //       var imagen = document.getElementById("foto1");
 //       if(imagenVolumen == "On"){
-//           imagen.src = "./images/Play.png";
+//           imagen.src = "./images/300.png";
 //           imagenVolumen = "Pause";
 //       }
 //       else {
